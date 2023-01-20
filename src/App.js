@@ -1,4 +1,3 @@
-import "./App.css";
 import Wordle from "./Wordle/Wordle";
 
 const App = () => {
