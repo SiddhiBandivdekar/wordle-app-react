@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Keyboard from "../components/Keyboard/Keyboard";
 import { wordList } from "../constants/data";
 import "./Wordle.css";
 
@@ -150,6 +151,34 @@ const Wordle = () => {
         </button>
       </div>
       {message && <div className="message">{message}</div>}
+      <div className="cube">
+        {[0, 1, 2, 3, 4, 5].map((row, rowIndex) => (
+          <div
+            className={`cube-row ${
+              boardData && row === boardData.rowIndex && error && "error"
+            }`}
+            key={rowIndex}
+          >
+            {[0, 1, 2, 3, 4].map((column, letterIndex) => (
+              <div
+                key={letterIndex}
+                className={`letter ${
+                  boardData && boardData.boardRowStatus[row]
+                    ? boardData.boardRowStatus[row][column]
+                    : ""
+                }`}
+              >
+                {boardData &&
+                  boardData.boardWords[row] &&
+                  boardData.boardWords[row][column]}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="bottom">
+        <Keyboard boardData={boardData} handleKeyPress={handleKeyPress} />
+      </div>
     </div>
   );
 };
