@@ -41,7 +41,7 @@ const Wordle = () => {
     setMessage(message);
     setTimeout(() => {
       setMessage(null);
-    }, 3000);
+    }, 7000);
   };
 
   const enterBoardWord = (word) => {
@@ -51,19 +51,20 @@ const Wordle = () => {
     let presentCharArray = boardData.presentCharArray;
     let absentCharArray = boardData.absentCharArray;
     let correctCharArray = boardData.correctCharArray;
-    let status = boardData.status;
     let rowIndex = boardData.rowIndex;
     let rowStatus = [];
     let matchCount = 0;
+    let status = boardData.status;
 
-    for (const i = 0; i < word.length; i++) {
+    for (let i = 0; i < word.length; i++) {
       if (solution.charAt(i) === word.charAt(i)) {
         matchCount++;
         rowStatus.push("correct");
         if (!correctCharArray.includes(word.charAt(i)))
           correctCharArray.push(word.charAt(i));
-        if (presentCharArray.indexOf(word.charAt(i)) !== -1)
+        if (presentCharArray.indexOf(word.charAt(i)) !== -1) {
           presentCharArray.splice(presentCharArray.indexOf(word.charAt(i)), 1);
+        }
       } else if (solution.includes(word.charAt(i))) {
         rowStatus.push("present");
         if (
@@ -146,7 +147,7 @@ const Wordle = () => {
     <div className="container">
       <div className="top">
         <div className="title">WORDLE</div>
-        <button className="reset" onClick={resetBoard}>
+        <button className="reset-board" onClick={resetBoard}>
           {"\u27f3"}
         </button>
       </div>
